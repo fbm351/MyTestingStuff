@@ -14,7 +14,6 @@
 		D34A9FBB18CB54AE00F579E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FBA18CB54AE00F579E0 /* main.m */; };
 		D34A9FBF18CB54AE00F579E0 /* FMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FBE18CB54AE00F579E0 /* FMAppDelegate.m */; };
 		D34A9FC218CB54AE00F579E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D34A9FC018CB54AE00F579E0 /* Main.storyboard */; };
-		D34A9FC518CB54AE00F579E0 /* FMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FC418CB54AE00F579E0 /* FMViewController.m */; };
 		D34A9FC718CB54AE00F579E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34A9FC618CB54AE00F579E0 /* Images.xcassets */; };
 		D34A9FCE18CB54AE00F579E0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34A9FCD18CB54AE00F579E0 /* XCTest.framework */; };
 		D34A9FCF18CB54AE00F579E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34A9FAE18CB54AE00F579E0 /* Foundation.framework */; };
@@ -55,8 +54,6 @@
 		D34A9FBD18CB54AE00F579E0 /* FMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMAppDelegate.h; sourceTree = "<group>"; };
 		D34A9FBE18CB54AE00F579E0 /* FMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMAppDelegate.m; sourceTree = "<group>"; };
 		D34A9FC118CB54AE00F579E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D34A9FC318CB54AE00F579E0 /* FMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMViewController.h; sourceTree = "<group>"; };
-		D34A9FC418CB54AE00F579E0 /* FMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMViewController.m; sourceTree = "<group>"; };
 		D34A9FC618CB54AE00F579E0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D34A9FCC18CB54AE00F579E0 /* MyTestingStuffTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyTestingStuffTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34A9FCD18CB54AE00F579E0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -155,8 +152,6 @@
 				D34A9FBD18CB54AE00F579E0 /* FMAppDelegate.h */,
 				D34A9FBE18CB54AE00F579E0 /* FMAppDelegate.m */,
 				D34A9FC018CB54AE00F579E0 /* Main.storyboard */,
-				D34A9FC318CB54AE00F579E0 /* FMViewController.h */,
-				D34A9FC418CB54AE00F579E0 /* FMViewController.m */,
 				D34A9FC618CB54AE00F579E0 /* Images.xcassets */,
 				D34A9FB518CB54AE00F579E0 /* Supporting Files */,
 			);
@@ -292,7 +287,6 @@
 			files = (
 				D34A9FBB18CB54AE00F579E0 /* main.m in Sources */,
 				D34A9FBF18CB54AE00F579E0 /* FMAppDelegate.m in Sources */,
-				D34A9FC518CB54AE00F579E0 /* FMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
