@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMSignUpViewController : UIViewController
+@interface FMSignUpViewController : UIViewController 
 
 @end
