@@ -55,7 +55,7 @@
 
 - (IBAction)signUpButtonPressed:(UIButton *)sender
 {
-    
+    [self signUpUser];
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender
@@ -65,11 +65,13 @@
 
 #pragma mark - UITextField Delegates
 
+/*
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
+*/
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -84,6 +86,7 @@
             NSLog(@"Not Valid");
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a valid email address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alertView show];
+            
         }
         else
         {
@@ -109,12 +112,27 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid SignUp" message:@"Please enter information for all fields" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alertView show];
     }
+    
+    else if (password.length < 6)
+    {
+        NSLog(@"Password too short");
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Password must be at least 6 characters" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alertView show];
+        self.passwordTextField.text = nil;
+        self.confirmPasswordTextField.text = nil;
+        [self.passwordTextField becomeFirstResponder];
+    }
+    
     else if (![password isEqualToString:confirmPassword])
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid SignUp" message:@"Passwords do not match.  Please reenter passwords" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         self.passwordTextField.text = nil;
         self.confirmPasswordTextField.text = nil;
+    }
+    else
+    {
+        NSLog(@"SignUp!");
     }
 }
 
