@@ -10,16 +10,20 @@
 
 @interface FMSignUpViewController () <UITextFieldDelegate>
 
+
+
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @property (strong, nonatomic) IBOutlet UIButton *signUpButton;
 @property (assign, nonatomic) id currentResponder;
+@property (strong, nonatomic) IBOutlet UILabel *emailTakenLabel;
 
 @end
 
 @implementation FMSignUpViewController
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,6 +47,7 @@
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
     self.confirmPasswordTextField.delegate = self;
+    self.emailTakenLabel.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,18 +85,9 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField.tag == 1) {
-        if (![self validateEmailWithString:textField.text])
-        {
-            NSLog(@"Not Valid");
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a valid email address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [alertView show];
-            
-        }
-        else
-        {
-            NSLog(@"Valid");
-        }
+    if (textField.tag == 1)
+    {
+        [self emailValidationChecksForTextField:textField];
     }
     self.currentResponder = nil;
 }
@@ -132,7 +128,7 @@
     }
     else
     {
-        NSLog(@"SignUp!");
+        [self saveToParse];
     }
 }
 
@@ -141,6 +137,74 @@
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:email];
+}
+
+- (void)emailValidationChecksForTextField:(UITextField *)textField
+{
+    if (self.emailTextField.text.length != 0) {
+        if ([self validateEmailWithString:textField.text])
+        {
+            [self isUsernameTaken];
+            NSLog(@"Valid");
+        }
+        else
+        {
+            NSLog(@"Not Valid");
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a valid email address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alertView show];
+        }
+    }
+    else
+    {
+        return;
+    }
+    
+
+}
+
+- (void)isUsernameTaken
+{
+    NSLog(@"Did call isUserNameTaken");
+    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    [query whereKey:@"username" containsString:self.emailTextField.text];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSLog(@"Email query %@", objects);
+        
+        if ([objects count] != 0)
+        {
+            self.emailTakenLabel.hidden = NO;
+        }
+        else
+        {
+            self.emailTakenLabel.hidden = YES;
+        }
+    }];
+}
+
+
+
+- (void)saveToParse
+{
+    PFUser *newUser = [PFUser user];
+    newUser.username = self.emailTextField.text;
+    newUser.password = self.passwordTextField.text;
+    newUser.email = newUser.username;
+    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"You have successfully registed for a user" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            NSString *errorString = [error userInfo][@"error"];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"SingUp Error!" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+            self.emailTextField.text = nil;
+            self.passwordTextField.text = nil;
+            self.confirmPasswordTextField.text = nil;
+            [self.emailTextField becomeFirstResponder];
+        }
+    }];
 }
 
 @end

@@ -261,7 +261,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FM;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Fredrick Myers";
 				TargetAttributes = {
 					D34A9FCB18CB54AE00F579E0 = {
@@ -535,6 +535,7 @@
 				D34A9FDF18CB54AE00F579E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D34A9FE018CB54AE00F579E0 /* Build configuration list for PBXNativeTarget "MyTestingStuffTests" */ = {
 			isa = XCConfigurationList;
@@ -543,6 +544,7 @@
 				D34A9FE218CB54AE00F579E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
