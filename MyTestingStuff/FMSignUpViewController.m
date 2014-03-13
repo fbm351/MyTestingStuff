@@ -60,7 +60,7 @@
 
 - (IBAction)signUpButtonPressed:(UIButton *)sender
 {
-    [self signUpUser];
+    [self checkUserForSignUp];
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender
@@ -94,12 +94,15 @@
 
 #pragma mark - Helper Methods
 
+//Closes keyboard when user taps on other parts of screen
 - (void)resignOnTap:(id)sender
 {
     [self.currentResponder resignFirstResponder];
 }
 
-- (void)signUpUser
+
+//Checks to make sure that all the valid fields are filled and that the format of the email address is valid and that the password is at least 6 characters long and that the passwords match.  If they do calls the saveToParse method.
+- (void)checkUserForSignUp
 {
     NSString *username = [self.emailTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *password = [self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -132,6 +135,7 @@
     }
 }
 
+//Validates that the email address sent is the correct format.
 - (BOOL)validateEmailWithString:(NSString *)email
 {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
@@ -139,6 +143,7 @@
     return [emailTest evaluateWithObject:email];
 }
 
+// Alerts the user if something is wrong with the email that was entered in the field.  Check validity and unigueness.
 - (void)emailValidationChecksForTextField:(UITextField *)textField
 {
     if (self.emailTextField.text.length != 0) {
