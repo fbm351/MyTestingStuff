@@ -39,14 +39,17 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    //Create a tap recognizer and set it to 1 tap and add to the view
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
     [singleTap setNumberOfTouchesRequired:1];
     [singleTap setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:singleTap];
     
+    //Setup the delegates
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
     self.confirmPasswordTextField.delegate = self;
+    
     self.emailTakenLabel.hidden = YES;
 }
 
@@ -70,14 +73,23 @@
 
 #pragma mark - UITextField Delegates
 
-/*
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if (textField.tag == 3 && (self.emailTextField.text.length == 0 || self.passwordTextField.text.length == 0 || self.confirmPasswordTextField.text.length == 0 ))
+    {
+        [self.emailTextField becomeFirstResponder];
+    }
+    else
+    {
+        [[self.view viewWithTag:textField.tag + 1] becomeFirstResponder];
+    }
+    [[self.view viewWithTag:textField.tag + 1] becomeFirstResponder];
     return YES;
 }
-*/
 
+
+//When text field is starts editing set that text field to current responder.
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     self.currentResponder = textField;
@@ -167,6 +179,7 @@
 
 }
 
+//Queris to see if the username/email address is taken
 - (void)isUsernameTaken
 {
     NSLog(@"Did call isUserNameTaken");
@@ -187,7 +200,7 @@
 }
 
 
-
+//Saves the user to Parse.
 - (void)saveToParse
 {
     PFUser *newUser = [PFUser user];
