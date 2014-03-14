@@ -183,7 +183,7 @@
 - (void)isUsernameTaken
 {
     NSLog(@"Did call isUserNameTaken");
-    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    PFQuery *query = [PFUser query];
     [query whereKey:@"username" containsString:self.emailTextField.text];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         NSLog(@"Email query %@", objects);
@@ -220,6 +220,7 @@
             self.emailTextField.text = nil;
             self.passwordTextField.text = nil;
             self.confirmPasswordTextField.text = nil;
+            self.emailTakenLabel.hidden = YES;
             [self.emailTextField becomeFirstResponder];
         }
     }];
