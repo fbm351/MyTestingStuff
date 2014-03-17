@@ -64,6 +64,7 @@
 - (IBAction)signUpButtonPressed:(UIButton *)sender
 {
     [self checkUserForSignUp];
+    
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender
@@ -223,6 +224,7 @@
             self.emailTakenLabel.hidden = YES;
             [self.emailTextField becomeFirstResponder];
         }
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 

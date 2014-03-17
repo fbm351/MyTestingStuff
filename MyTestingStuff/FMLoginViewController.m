@@ -58,7 +58,7 @@
 
 - (IBAction)loginButtonPressed:(UIButton *)sender
 {
-    
+    [self signInUser];
 }
 
 
@@ -85,6 +85,41 @@
 - (void)resignOnTap:(id)sender
 {
     [self.currentResponder resignFirstResponder];
+}
+
+- (void)signInUser
+{
+    if (self.emailTextField.text.length == 0 || self.passwordTextField.text.length == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Login" message:@"Please enter information for all fields" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alertView show];
+    }
+    else
+    {
+        [self parseLogin];
+    }
+}
+
+- (void)parseLogin
+{
+    [PFUser logInWithUsernameInBackground:self.emailTextField.text password:self.passwordTextField.text block:^(PFUser *user, NSError *error) {
+        BOOL isEmailVerified = [user[@"emailVerified"] boolValue];
+        if (user && isEmailVerified == YES)
+        {
+            NSLog(@"User Signed in");
+            NSLog(@"Email Verified %@", user[@"emailVerified"]);
+        }
+        else if (!isEmailVerified)
+        {
+            NSLog(@"User Valid but email not verified");
+        }
+        else
+        {
+            NSString *errorString = [error userInfo][@"error"];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Login Error!" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
+    }];
 }
 
 @end
