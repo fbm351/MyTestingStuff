@@ -37,6 +37,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if ([PFUser currentUser])
+    {
+        [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+    }
+    
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
     [singleTap setNumberOfTouchesRequired:1];
     [singleTap setNumberOfTapsRequired:1];
