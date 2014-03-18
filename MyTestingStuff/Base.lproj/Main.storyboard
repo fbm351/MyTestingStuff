@@ -66,6 +66,14 @@
                                     <segue destination="XeJ-uS-I9x" kind="push" id="JLy-Tn-blz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Verification Email Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BI1-g6-1EA">
+                                <rect key="frame" x="50" y="74" width="221" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081399917603" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -73,6 +81,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="emailSentLabel" destination="BI1-g6-1EA" id="72e-6V-hrY"/>
                         <outlet property="emailTextField" destination="iGx-z8-ymA" id="Qw4-Qx-uce"/>
                         <outlet property="loginButton" destination="C52-eQ-2cA" id="Jsz-Mq-jSf"/>
                         <outlet property="passwordTextField" destination="gqx-iY-4Rv" id="ShB-wX-Sby"/>

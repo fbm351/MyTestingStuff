@@ -8,13 +8,14 @@
 
 #import "FMLoginViewController.h"
 
-@interface FMLoginViewController () <UITextFieldDelegate>
+@interface FMLoginViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (assign, nonatomic) id currentResponder;
 
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UILabel *emailSentLabel;
 
 @end
 
@@ -40,6 +41,7 @@
     
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
+    [self.emailSentLabel setAlpha:0.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,6 +82,27 @@
     self.currentResponder = textField;
 }
 
+#pragma mark - UIAlertView Delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        NSLog(@"User before Email update %@", [PFUser currentUser]);
+        [[PFUser currentUser] setObject:@"reset@reset.com" forKey:@"email"];
+        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [[PFUser currentUser] setObject:self.emailTextField.text forKey:@"email"];
+            [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                [PFUser logOut];
+                NSLog(@"User after Email update %@", [PFUser currentUser]);
+                self.passwordTextField.text = nil;
+                [self.passwordTextField resignFirstResponder];
+                [self showThenFadeLabel:self.emailSentLabel];
+
+            }];
+        }];
+    }
+}
+
 #pragma mark - Helper Methods
 
 - (void)resignOnTap:(id)sender
@@ -104,20 +127,46 @@
 {
     [PFUser logInWithUsernameInBackground:self.emailTextField.text password:self.passwordTextField.text block:^(PFUser *user, NSError *error) {
         BOOL isEmailVerified = [user[@"emailVerified"] boolValue];
-        if (user && isEmailVerified == YES)
+        if (!error)
         {
-            NSLog(@"User Signed in");
-            NSLog(@"Email Verified %@", user[@"emailVerified"]);
-        }
-        else if (!isEmailVerified)
-        {
-            NSLog(@"User Valid but email not verified");
+            if (user && isEmailVerified == YES)
+            {
+                NSLog(@"User Signed in");
+                NSLog(@"Email Verified %@", user[@"emailVerified"]);
+            }
+            else if (!isEmailVerified)
+            {
+                //NSLog(@"User Valid but email not verified");
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Verify Email" message:[NSString stringWithFormat:@"This email address ( %@ ) must be verified before login.", self.emailTextField.text] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Resend Email", nil];
+                [alertView show];
+            }
+            else
+            {
+                NSString *errorString = [error userInfo][@"error"];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Login Error!" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alertView show];
+            }
         }
         else
         {
             NSString *errorString = [error userInfo][@"error"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Login Error!" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alertView show];
+        }
+            
+        
+    }];
+}
+
+- (void)showThenFadeLabel:(UILabel *)label
+{
+    [label setAlpha:1.0];
+    [UIView animateWithDuration:1.0 delay:4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [label setAlpha:0.0];
+    } completion:^(BOOL finished) {
+        if (finished)
+        {
+            NSLog(@"Animation Done");
         }
     }];
 }
