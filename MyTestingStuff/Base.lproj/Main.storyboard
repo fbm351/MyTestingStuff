@@ -74,6 +74,26 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password Reset Email Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gY-S7-gED">
+                                <rect key="frame" x="28" y="74" width="265" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zj-RT-ClG">
+                                <rect key="frame" x="97" y="255" width="129" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Forgot your password?">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="forgotYourPasswordButtonPressed:" destination="6xX-cp-g2H" eventType="touchUpInside" id="7aP-tJ-pbL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -83,7 +103,9 @@
                     <connections>
                         <outlet property="emailSentLabel" destination="BI1-g6-1EA" id="72e-6V-hrY"/>
                         <outlet property="emailTextField" destination="iGx-z8-ymA" id="Qw4-Qx-uce"/>
+                        <outlet property="forgotYourPasswordButton" destination="7zj-RT-ClG" id="57s-wl-V3K"/>
                         <outlet property="loginButton" destination="C52-eQ-2cA" id="Jsz-Mq-jSf"/>
+                        <outlet property="passwordResetEmailSentLabel" destination="4gY-S7-gED" id="BJG-6J-eG1"/>
                         <outlet property="passwordTextField" destination="gqx-iY-4Rv" id="ShB-wX-Sby"/>
                     </connections>
                 </viewController>

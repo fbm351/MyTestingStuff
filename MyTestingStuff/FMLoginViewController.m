@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UILabel *emailSentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *passwordResetEmailSentLabel;
+@property (strong, nonatomic) IBOutlet UIButton *forgotYourPasswordButton;
 
 @end
 
@@ -42,6 +44,7 @@
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
     [self.emailSentLabel setAlpha:0.0];
+    [self.passwordResetEmailSentLabel setAlpha:0.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,6 +66,10 @@
     [self signInUser];
 }
 
+- (IBAction)forgotYourPasswordButtonPressed:(UIButton *)sender
+{
+    [self resetPassword];
+}
 
 #pragma mark - UITextField Delegate
 
@@ -86,20 +93,43 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1) {
-        NSLog(@"User before Email update %@", [PFUser currentUser]);
-        [[PFUser currentUser] setObject:@"reset@reset.com" forKey:@"email"];
-        [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [[PFUser currentUser] setObject:self.emailTextField.text forKey:@"email"];
+    if (alertView.tag == 1) {
+        if (buttonIndex == 1) {
+            NSLog(@"User before Email update %@", [PFUser currentUser]);
+            [[PFUser currentUser] setObject:@"reset@reset.com" forKey:@"email"];
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [PFUser logOut];
-                NSLog(@"User after Email update %@", [PFUser currentUser]);
-                self.passwordTextField.text = nil;
-                [self.passwordTextField resignFirstResponder];
-                [self showThenFadeLabel:self.emailSentLabel];
-
+                [[PFUser currentUser] setObject:self.emailTextField.text forKey:@"email"];
+                [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    [PFUser logOut];
+                    NSLog(@"User after Email update %@", [PFUser currentUser]);
+                    self.passwordTextField.text = nil;
+                    [self.passwordTextField resignFirstResponder];
+                    [self showThenFadeLabel:self.emailSentLabel];
+                    
+                }];
             }];
-        }];
+        }
+    }
+    else if (alertView.tag == 2)
+    {
+        if (buttonIndex == 1) {
+            NSString *emailString = [alertView textFieldAtIndex:0].text;
+            [PFUser requestPasswordResetForEmailInBackground:emailString block:^(BOOL succeeded, NSError *error) {
+                if (!error)
+                {
+                    NSLog(@"Password email on the way");
+                    [self showThenFadeLabel:self.passwordResetEmailSentLabel];
+                    NSLog(@"Current User = %@", [PFUser currentUser]);
+                }
+                else
+                {
+                    NSString *errorString = [error userInfo][@"error"];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error!" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alertView show];
+                }
+            }];
+            self.emailTextField.text = emailString;
+        }
     }
 }
 
@@ -138,6 +168,7 @@
             {
                 //NSLog(@"User Valid but email not verified");
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Verify Email" message:[NSString stringWithFormat:@"This email address ( %@ ) must be verified before login.", self.emailTextField.text] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Resend Email", nil];
+                alertView.tag = 1;
                 [alertView show];
             }
             else
@@ -169,6 +200,14 @@
             NSLog(@"Animation Done");
         }
     }];
+}
+
+- (void)resetPassword
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you Sure you want to reset your password?" message:@"Enter email address associated with this account" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Reset", nil];
+    [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alertView.tag = 2;
+    [alertView show];
 }
 
 @end
