@@ -33,6 +33,7 @@
 		D34A9FFA18CBC87B00F579E0 /* FMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FF918CBC87B00F579E0 /* FMLoginViewController.m */; };
 		D34A9FFC18CBCD1900F579E0 /* LoginBG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D34A9FFB18CBCD1900F579E0 /* LoginBG@2x.jpg */; };
 		D34AA00018CBDAF400F579E0 /* FMSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FFF18CBDAF400F579E0 /* FMSignUpViewController.m */; };
+		D3DD9F0618D8CF5A00C27BED /* FMFriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DD9F0518D8CF5A00C27BED /* FMFriendsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		D34A9FFB18CBCD1900F579E0 /* LoginBG@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "LoginBG@2x.jpg"; sourceTree = "<group>"; };
 		D34A9FFE18CBDAF400F579E0 /* FMSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMSignUpViewController.h; sourceTree = "<group>"; };
 		D34A9FFF18CBDAF400F579E0 /* FMSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMSignUpViewController.m; sourceTree = "<group>"; };
+		D3DD9F0418D8CF5A00C27BED /* FMFriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMFriendsTableViewController.h; sourceTree = "<group>"; };
+		D3DD9F0518D8CF5A00C27BED /* FMFriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMFriendsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +163,7 @@
 				D34A9FBD18CB54AE00F579E0 /* FMAppDelegate.h */,
 				D34A9FBE18CB54AE00F579E0 /* FMAppDelegate.m */,
 				D34A9FC018CB54AE00F579E0 /* Main.storyboard */,
+				D3DD9F0318D8CF2300C27BED /* Friends */,
 				D34A9FF718CBC86600F579E0 /* Login */,
 				D34A9FFD18CBDAE100F579E0 /* Sign Up */,
 				D34A9FC618CB54AE00F579E0 /* Images.xcassets */,
@@ -214,6 +218,15 @@
 				D34A9FFF18CBDAF400F579E0 /* FMSignUpViewController.m */,
 			);
 			name = "Sign Up";
+			sourceTree = "<group>";
+		};
+		D3DD9F0318D8CF2300C27BED /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				D3DD9F0418D8CF5A00C27BED /* FMFriendsTableViewController.h */,
+				D3DD9F0518D8CF5A00C27BED /* FMFriendsTableViewController.m */,
+			);
+			name = Friends;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D34A9FFA18CBC87B00F579E0 /* FMLoginViewController.m in Sources */,
+				D3DD9F0618D8CF5A00C27BED /* FMFriendsTableViewController.m in Sources */,
 				D34A9FBB18CB54AE00F579E0 /* main.m in Sources */,
 				D34A9FBF18CB54AE00F579E0 /* FMAppDelegate.m in Sources */,
 				D34AA00018CBDAF400F579E0 /* FMSignUpViewController.m in Sources */,

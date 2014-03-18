@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *emailSentLabel;
 @property (strong, nonatomic) IBOutlet UILabel *passwordResetEmailSentLabel;
 @property (strong, nonatomic) IBOutlet UIButton *forgotYourPasswordButton;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -45,6 +46,7 @@
     self.passwordTextField.delegate = self;
     [self.emailSentLabel setAlpha:0.0];
     [self.passwordResetEmailSentLabel setAlpha:0.0];
+    self.activityIndicator.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,7 +70,13 @@
 
 - (IBAction)forgotYourPasswordButtonPressed:(UIButton *)sender
 {
-    [self resetPassword];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to reset your password?" message:@"Enter email address associated with this account." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Reset", nil];
+    [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alertView.tag = 2;
+    [alertView textFieldAtIndex:0].placeholder = @"email address";
+    [alertView textFieldAtIndex:0].clearButtonMode = UITextFieldViewModeWhileEditing;
+    [alertView textFieldAtIndex:0].keyboardType = UIKeyboardTypeEmailAddress;
+    [alertView show];
 }
 
 #pragma mark - UITextField Delegate
@@ -117,9 +125,7 @@
             [PFUser requestPasswordResetForEmailInBackground:emailString block:^(BOOL succeeded, NSError *error) {
                 if (!error)
                 {
-                    NSLog(@"Password email on the way");
                     [self showThenFadeLabel:self.passwordResetEmailSentLabel];
-                    NSLog(@"Current User = %@", [PFUser currentUser]);
                 }
                 else
                 {
@@ -161,8 +167,10 @@
         {
             if (user && isEmailVerified == YES)
             {
-                NSLog(@"User Signed in");
-                NSLog(@"Email Verified %@", user[@"emailVerified"]);
+                //Stuff to do when sign in correct.
+                [self.activityIndicator startAnimating];
+                self.activityIndicator.hidden = NO;
+                [self performSegueWithIdentifier:@"loginSegue" sender:nil];
             }
             else if (!isEmailVerified)
             {
@@ -187,6 +195,8 @@
             
         
     }];
+    [self.activityIndicator stopAnimating];
+    self.activityIndicator.hidden = YES;
 }
 
 - (void)showThenFadeLabel:(UILabel *)label
@@ -202,12 +212,5 @@
     }];
 }
 
-- (void)resetPassword
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you Sure you want to reset your password?" message:@"Enter email address associated with this account" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Reset", nil];
-    [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    alertView.tag = 2;
-    [alertView show];
-}
 
 @end
