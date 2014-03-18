@@ -10,8 +10,6 @@
 
 @interface FMSignUpViewController () <UITextFieldDelegate>
 
-
-
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -39,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //Create a tap recognizer and set it to 1 tap and add to the view
+    //Create a tap recognizer and set it to 1 tap and add to the view.  When the tap is detected it will call the resignOnTap method.
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
     [singleTap setNumberOfTouchesRequired:1];
     [singleTap setNumberOfTapsRequired:1];
@@ -180,7 +178,7 @@
 
 }
 
-//Queris to see if the username/email address is taken
+//Queries to see if the username/email address is taken
 - (void)isUsernameTaken
 {
     NSLog(@"Did call isUserNameTaken");
