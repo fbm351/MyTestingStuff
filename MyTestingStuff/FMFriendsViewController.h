@@ -1,5 +1,5 @@
 //
-//  FMFriendsTableViewController.h
+//  FMFriendsViewController.h
 //  MyTestingStuff
 //
 //  Created by Fredrick Myers on 3/18/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMFriendsTableViewController : UITableViewController
+@interface FMFriendsViewController : UIViewController
 
 @end
