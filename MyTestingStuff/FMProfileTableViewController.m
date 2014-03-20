@@ -10,9 +10,28 @@
 
 @interface FMProfileTableViewController ()
 
+@property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
+@property (strong, nonatomic) IBOutlet UILabel *emailLabel;
+@property (strong, nonatomic) IBOutlet UILabel *firstNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *lastNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *birthDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *cityLabel;
+@property (strong, nonatomic) IBOutlet UILabel *stateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *genderLabel;
+
+@property (strong, nonatomic) PFUser *user;
+
 @end
 
 @implementation FMProfileTableViewController
+
+-(PFUser *)user
+{
+    if (!_user) {
+        _user = [[PFUser alloc] init];
+    }
+    return _user;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,11 +46,11 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.user = [PFUser currentUser];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self setupView];
+    
+ 
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,78 +61,44 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    // Return the number of sections.
+//    return 0;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    // Return the number of rows in the section.
+//    return 0;
+//}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
+#pragma mark - Helper Methods
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)setupView
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    if ([self.user[@"firstName"] isEqualToString:nil])
+    {
+        self.navBar.title = @"Profile";
+    }
+    else
+    {
+        self.navBar.title = self.user[@"firstName"];
+    }
     
-    // Configure the cell...
+    self.emailLabel.text = self.user.username;
+    self.firstNameLabel.text = self.user[@"firstName"];
+    self.lastNameLabel.text = self.user[@"lastName"];
     
-    return cell;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM-dd-yyyy"];
+    self.birthDateLabel.text = [formatter stringFromDate:self.user[@"birthDate"]];
+    
+    self.cityLabel.text = self.user[@"city"];
+    self.stateLabel.text = self.user[@"state"];
+    self.genderLabel.text = self.user[@"gender"];
+    
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
