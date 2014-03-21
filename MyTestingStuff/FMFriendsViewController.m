@@ -93,7 +93,6 @@
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.friends = [objects mutableCopy];
-            NSLog(@"%@", self.friends);
             [self.tableView reloadData];
         }
         else

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D31FD23018DC5D3000575953 /* FMProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31FD22F18DC5D3000575953 /* FMProfileTableViewController.m */; };
+		D31FD23418DC773500575953 /* FMEditProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31FD23318DC773500575953 /* FMEditProfileTableViewController.m */; };
 		D34A9FAF18CB54AE00F579E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34A9FAE18CB54AE00F579E0 /* Foundation.framework */; };
 		D34A9FB118CB54AE00F579E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34A9FB018CB54AE00F579E0 /* CoreGraphics.framework */; };
 		D34A9FB318CB54AE00F579E0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34A9FB218CB54AE00F579E0 /* UIKit.framework */; };
@@ -33,7 +35,6 @@
 		D34A9FFA18CBC87B00F579E0 /* FMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FF918CBC87B00F579E0 /* FMLoginViewController.m */; };
 		D34A9FFC18CBCD1900F579E0 /* LoginBG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D34A9FFB18CBCD1900F579E0 /* LoginBG@2x.jpg */; };
 		D34AA00018CBDAF400F579E0 /* FMSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FFF18CBDAF400F579E0 /* FMSignUpViewController.m */; };
-		D3944AA418DB7E5400A53C68 /* FMProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3944AA318DB7E5400A53C68 /* FMProfileTableViewController.m */; };
 		D3DD9F0918D8D57F00C27BED /* FMFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DD9F0818D8D57F00C27BED /* FMFriendsViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D31FD22E18DC5D3000575953 /* FMProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMProfileTableViewController.h; sourceTree = "<group>"; };
+		D31FD22F18DC5D3000575953 /* FMProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMProfileTableViewController.m; sourceTree = "<group>"; };
+		D31FD23218DC773500575953 /* FMEditProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMEditProfileTableViewController.h; sourceTree = "<group>"; };
+		D31FD23318DC773500575953 /* FMEditProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMEditProfileTableViewController.m; sourceTree = "<group>"; };
 		D34A9FAB18CB54AE00F579E0 /* MyTestingStuff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTestingStuff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D34A9FAE18CB54AE00F579E0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D34A9FB018CB54AE00F579E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -80,8 +85,6 @@
 		D34A9FFB18CBCD1900F579E0 /* LoginBG@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "LoginBG@2x.jpg"; sourceTree = "<group>"; };
 		D34A9FFE18CBDAF400F579E0 /* FMSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMSignUpViewController.h; sourceTree = "<group>"; };
 		D34A9FFF18CBDAF400F579E0 /* FMSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMSignUpViewController.m; sourceTree = "<group>"; };
-		D3944AA218DB7E5400A53C68 /* FMProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMProfileTableViewController.h; sourceTree = "<group>"; };
-		D3944AA318DB7E5400A53C68 /* FMProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMProfileTableViewController.m; sourceTree = "<group>"; };
 		D3DD9F0718D8D57F00C27BED /* FMFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMFriendsViewController.h; sourceTree = "<group>"; };
 		D3DD9F0818D8D57F00C27BED /* FMFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMFriendsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D31FD23118DC71AC00575953 /* Profile Edit */ = {
+			isa = PBXGroup;
+			children = (
+				D31FD23218DC773500575953 /* FMEditProfileTableViewController.h */,
+				D31FD23318DC773500575953 /* FMEditProfileTableViewController.m */,
+			);
+			name = "Profile Edit";
+			sourceTree = "<group>";
+		};
 		D34A9FA218CB54AE00F579E0 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +181,7 @@
 				D3DD9F0318D8CF2300C27BED /* Friends */,
 				D34A9FF718CBC86600F579E0 /* Login */,
 				D3E6044018DA336300224090 /* Profile */,
+				D31FD23118DC71AC00575953 /* Profile Edit */,
 				D34A9FFD18CBDAE100F579E0 /* Sign Up */,
 				D34A9FC618CB54AE00F579E0 /* Images.xcassets */,
 				D34A9FB518CB54AE00F579E0 /* Supporting Files */,
@@ -236,8 +249,8 @@
 		D3E6044018DA336300224090 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				D3944AA218DB7E5400A53C68 /* FMProfileTableViewController.h */,
-				D3944AA318DB7E5400A53C68 /* FMProfileTableViewController.m */,
+				D31FD22E18DC5D3000575953 /* FMProfileTableViewController.h */,
+				D31FD22F18DC5D3000575953 /* FMProfileTableViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -343,7 +356,8 @@
 			files = (
 				D34A9FFA18CBC87B00F579E0 /* FMLoginViewController.m in Sources */,
 				D3DD9F0918D8D57F00C27BED /* FMFriendsViewController.m in Sources */,
-				D3944AA418DB7E5400A53C68 /* FMProfileTableViewController.m in Sources */,
+				D31FD23418DC773500575953 /* FMEditProfileTableViewController.m in Sources */,
+				D31FD23018DC5D3000575953 /* FMProfileTableViewController.m in Sources */,
 				D34A9FBB18CB54AE00F579E0 /* main.m in Sources */,
 				D34A9FBF18CB54AE00F579E0 /* FMAppDelegate.m in Sources */,
 				D34AA00018CBDAF400F579E0 /* FMSignUpViewController.m in Sources */,

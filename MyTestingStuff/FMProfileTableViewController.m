@@ -2,13 +2,15 @@
 //  FMProfileTableViewController.m
 //  MyTestingStuff
 //
-//  Created by Fredrick Myers on 3/20/14.
+//  Created by Fredrick Myers on 3/21/14.
 //  Copyright (c) 2014 Fredrick Myers. All rights reserved.
 //
 
 #import "FMProfileTableViewController.h"
 
 @interface FMProfileTableViewController ()
+
+@property (strong, nonatomic) PFUser *user;
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
 @property (strong, nonatomic) IBOutlet UILabel *emailLabel;
@@ -19,7 +21,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *stateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
 
-@property (strong, nonatomic) PFUser *user;
 
 @end
 
@@ -48,9 +49,19 @@
     
     self.user = [PFUser currentUser];
     
-    [self setupView];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
     
- 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self setupView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,17 +72,20 @@
 
 #pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    // Return the number of sections.
-//    return 0;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    // Return the number of rows in the section.
-//    return 0;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+
 
 #pragma mark - Helper Methods
 
@@ -91,14 +105,12 @@
     self.lastNameLabel.text = self.user[@"lastName"];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM-dd-yyyy"];
+    [formatter setDateFormat:@"MMM dd, yyyy"];
     self.birthDateLabel.text = [formatter stringFromDate:self.user[@"birthDate"]];
     
     self.cityLabel.text = self.user[@"city"];
     self.stateLabel.text = self.user[@"state"];
-    self.genderLabel.text = self.user[@"gender"];
-    
+    self.genderLabel.text = self.user[@"gender"];    
 }
-
 
 @end

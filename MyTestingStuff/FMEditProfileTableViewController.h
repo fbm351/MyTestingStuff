@@ -1,5 +1,5 @@
 //
-//  FMProfileTableViewController.h
+//  FMEditProfileTableViewController.h
 //  MyTestingStuff
 //
 //  Created by Fredrick Myers on 3/21/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FMProfileTableViewController : UITableViewController
+@interface FMEditProfileTableViewController : UITableViewController
 
 @end
