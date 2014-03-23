@@ -83,6 +83,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - IBActions
+
+- (IBAction)logoutBarButtonPressed:(UIBarButtonItem *)sender
+{
+    [PFUser logOut];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

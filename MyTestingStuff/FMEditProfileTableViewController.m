@@ -118,8 +118,6 @@
 {
     CGFloat height = self.tableView.rowHeight;
     
-    //NSLog(@"Row in Height for Row %i", indexPath.row);
-    
     if (indexPath.row  == kDatePickerIndex)
     {
         if (self.birthDateDatePicker.hidden == YES) {
@@ -129,7 +127,6 @@
         {
             height = kDatePickerCellHeight;
         }
-        NSLog(@"height = %f", height);
     }
     else if (indexPath.row == kStatePickerIndex)
     {
@@ -353,6 +350,8 @@
     else
     {
         self.stateLabel.text = self.user[@"state"];
+        NSUInteger stateIndex = [self.states indexOfObject:self.user[@"state"]];
+        [self.statePicker selectRow:stateIndex inComponent:0 animated:NO];
     }
     
     if (self.user[@"gender"] == nil)
@@ -362,6 +361,8 @@
     else
     {
         self.genderLabel.text = self.user[@"gender"];
+        NSUInteger genderIndex = [self.genders indexOfObject:self.user[@"gender"]];
+        [self.genderPicker selectRow:genderIndex inComponent:0 animated:NO];
     }
 }
 
