@@ -47,7 +47,7 @@
 {
     [super viewDidLoad];
     
-    self.user = [PFUser currentUser];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -55,13 +55,26 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self setupView];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    
     [super viewDidAppear:animated];
+    
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.user = [PFUser currentUser];
+    [self setupView];
     [self.tableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning

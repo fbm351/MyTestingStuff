@@ -159,7 +159,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Row in didSelect Row %i", indexPath.row);
     if (indexPath.row == kDatePickerIndex - 1)
     {
         if (self.birthDateDatePicker.hidden == NO)
@@ -273,7 +272,7 @@
 {
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
-    NSLog(@"Row in hide cell %i", indexPath.row);
+    
     
     if (indexPath.row == kDatePickerIndex - 1) {
         self.birthDateDatePicker.hidden = NO;
@@ -306,7 +305,6 @@
 
 - (void)hideCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Row in Show Cell %i", indexPath.row);
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
     
@@ -369,28 +367,33 @@
 
 - (void)saveUserToParse
 {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    NSLog(@"Self.User = (First Name: %@\n Last Name: %@\n City: %@\n Gender: %@\n State: %@\n Birthdate: %@)", self.firstNameTextField.text, self.lastNameTextField.text, self.cityTextField.text, self.genderLabel.text, self.stateLabel.text, [formatter stringFromDate:self.birthDate]);
+    
     self.user[@"firstName"] = self.firstNameTextField.text;
     self.user[@"lastName"] = self.lastNameTextField.text;
     self.user[@"birthDate"] = self.birthDate;
     self.user[@"city"] = self.cityTextField.text;
-    self.user[@"state"] = self.state;
-    self.user[@"gender"] = self.gender;
-    //self.user[@"fullName"] = [NSString stringWithFormat:@"%@ %@", self.firstNameTextField.text, self.lastNameTextField.text];
+    self.user[@"state"] = self.stateLabel.text;
+    self.user[@"gender"] = self.genderLabel.text;
+    self.user[@"fullName"] = [NSString stringWithFormat:@"%@ %@", self.firstNameTextField.text, self.lastNameTextField.text];
     
     NSLog(@"%@", self.user);
     
-//    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (!error)
-//        {
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }
-//        else
-//        {
-//            NSString *errorString = [error userInfo][@"error"];
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Save Error!" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//            [alertView show];
-//        }
-//    }];
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            NSString *errorString = [error userInfo][@"error"];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Save Error!" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
+    }];
 }
 
 
