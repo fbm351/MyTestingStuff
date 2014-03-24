@@ -62,8 +62,10 @@
 {
     [super viewDidLoad];
     
-    
+    // setup values for gender picker
     self.genders = @[@"male", @"female"];
+    
+    // setup values for state picker
     self.states = @[@"Alabama", @"Alaska", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Florida", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana",@"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin",@"Wyoming"];
     
     self.genderPicker.delegate = self;
@@ -109,11 +111,13 @@
 
 #pragma mark - Table view data source
 
+//Set header height for static cell
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 30;
 }
 
+//Changes the cell height of the cell that holds the pickers based on if the picker is hidden or not and sets the default cell height.
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = self.tableView.rowHeight;
@@ -154,6 +158,7 @@
 
 #pragma mark - Table View Delegates
 
+//Opens and closes the pickers.  The picker will be in the cell below the selected cell.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == kDatePickerIndex - 1)
@@ -194,6 +199,7 @@
 
 #pragma mark - UIPickerView Delegate
 
+//Sets the value for the state label and the gender label based on the row selected in the respective pickers
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (pickerView == self.statePicker)
@@ -229,17 +235,15 @@
     }
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     if (pickerView == self.statePicker)
     {
-        NSString *state = self.states[row];
-        return state;
+        return [self setupPickerViewWithView:view andText:self.states[row]];
     }
     else
     {
-        NSString *gender = self.genders[row];
-        return gender;
+        return [self setupPickerViewWithView:view andText:self.genders[row]];
     }
 }
 
@@ -265,6 +269,8 @@
     
 }
 
+
+//Does the animation to display the selected picker
 - (void)showCellAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView beginUpdates];
@@ -300,6 +306,7 @@
     [self.tableView reloadData];
 }
 
+//Hides the picker one the row is unselected.
 - (void)hideCellAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView beginUpdates];
@@ -395,6 +402,22 @@
             [alertView show];
         }
     }];
+}
+
+- (UILabel *)setupPickerViewWithView:(UIView *)view andText:(NSString *)text
+{
+    UILabel *label;
+    if (view) {
+        label = (UILabel *)view;
+    }
+    else
+    {
+        label = [UILabel new];
+        label.text = text;
+        label.backgroundColor = [UIColor clearColor];
+        [label sizeToFit];
+    }
+    return label;
 }
 
 

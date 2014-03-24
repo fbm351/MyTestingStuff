@@ -69,7 +69,15 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     PFUser *user = self.friends[indexPath.row];
-    cell.textLabel.text = user.username;
+    
+    if (user[@"firstName"] == nil) {
+        cell.textLabel.text = user.username;
+    }
+    else
+    {
+        cell.textLabel.text = user[@"fullName"];
+    }
+    
     
     return cell;
 }

@@ -8,7 +8,7 @@
 
 #import "FMProfileTableViewController.h"
 
-@interface FMProfileTableViewController ()
+@interface FMProfileTableViewController () <UIAlertViewDelegate>
 
 @property (strong, nonatomic) PFUser *user;
 
@@ -85,10 +85,10 @@
 
 #pragma mark - IBActions
 
-- (IBAction)logoutBarButtonPressed:(UIBarButtonItem *)sender
+- (IBAction)logOutButtonPressed:(UIButton *)sender
 {
-    [PFUser logOut];
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log out", nil];
+    [alertView show];
 }
 
 
@@ -96,7 +96,23 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    if (section == 0) {
+        return 30;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+#pragma mark - UIAlerView Delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [PFUser logOut];
+        [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
+    }
 }
 
 #pragma mark - Navigation
@@ -113,13 +129,13 @@
 
 - (void)setupView
 {
-    if ([self.user[@"firstName"] isEqualToString:nil])
+    if ([self.user[@"fullName"] isEqualToString:nil])
     {
         self.navBar.title = @"Profile";
     }
     else
     {
-        self.navBar.title = self.user[@"firstName"];
+        self.navBar.title = self.user[@"fullName"];
     }
     
     self.emailLabel.text = self.user.username;
@@ -133,6 +149,11 @@
     self.cityLabel.text = self.user[@"city"];
     self.stateLabel.text = self.user[@"state"];
     self.genderLabel.text = self.user[@"gender"];    
+}
+
+- (void)logoutUser
+{
+    
 }
 
 @end
