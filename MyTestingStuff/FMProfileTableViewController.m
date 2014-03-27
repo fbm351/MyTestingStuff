@@ -7,8 +7,11 @@
 //
 
 #import "FMProfileTableViewController.h"
+#import "FMLogOutViewController.h"
+#import "FMPresentDetailTransition.h"
+#import "FMDismissDetailTransition.h"
 
-@interface FMProfileTableViewController () <UIAlertViewDelegate>
+@interface FMProfileTableViewController () <UIAlertViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) PFUser *user;
 
@@ -87,8 +90,13 @@
 
 - (IBAction)logOutButtonPressed:(UIButton *)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log out", nil];
-    [alertView show];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log out", nil];
+//    [alertView show];
+    
+    FMLogOutViewController *logOutView = [[FMLogOutViewController alloc] init];
+    logOutView.modalPresentationStyle = UIModalPresentationCustom;
+    logOutView.transitioningDelegate = self;
+    [self presentViewController:logOutView animated:YES completion:nil];
 }
 
 
@@ -107,13 +115,13 @@
 
 #pragma mark - UIAlerView Delegate
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        [PFUser logOut];
-        [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
-    }
-}
+//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (buttonIndex == 1) {
+//        [PFUser logOut];
+//        [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
+//    }
+//}
 
 #pragma mark - Navigation
 
@@ -122,6 +130,18 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+}
+
+#pragma mark - UIViewControllerTransitioning Delegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return [[FMPresentDetailTransition alloc] init];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [[FMDismissDetailTransition alloc] init];
 }
 
 

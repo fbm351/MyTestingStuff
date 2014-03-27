@@ -35,6 +35,9 @@
 		D34A9FFA18CBC87B00F579E0 /* FMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FF918CBC87B00F579E0 /* FMLoginViewController.m */; };
 		D34A9FFC18CBCD1900F579E0 /* LoginBG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D34A9FFB18CBCD1900F579E0 /* LoginBG@2x.jpg */; };
 		D34AA00018CBDAF400F579E0 /* FMSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A9FFF18CBDAF400F579E0 /* FMSignUpViewController.m */; };
+		D39EF0CE18E45A2C0086F5ED /* FMLogOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39EF0CD18E45A2C0086F5ED /* FMLogOutViewController.m */; };
+		D39EF0D518E45F440086F5ED /* FMPresentDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D39EF0D218E45F440086F5ED /* FMPresentDetailTransition.m */; };
+		D39EF0D618E45F440086F5ED /* FMDismissDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D39EF0D418E45F440086F5ED /* FMDismissDetailTransition.m */; };
 		D3DD9F0918D8D57F00C27BED /* FMFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DD9F0818D8D57F00C27BED /* FMFriendsViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +88,12 @@
 		D34A9FFB18CBCD1900F579E0 /* LoginBG@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "LoginBG@2x.jpg"; sourceTree = "<group>"; };
 		D34A9FFE18CBDAF400F579E0 /* FMSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMSignUpViewController.h; sourceTree = "<group>"; };
 		D34A9FFF18CBDAF400F579E0 /* FMSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMSignUpViewController.m; sourceTree = "<group>"; };
+		D39EF0CC18E45A2C0086F5ED /* FMLogOutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLogOutViewController.h; sourceTree = "<group>"; };
+		D39EF0CD18E45A2C0086F5ED /* FMLogOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMLogOutViewController.m; sourceTree = "<group>"; };
+		D39EF0D118E45F440086F5ED /* FMPresentDetailTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMPresentDetailTransition.h; sourceTree = "<group>"; };
+		D39EF0D218E45F440086F5ED /* FMPresentDetailTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMPresentDetailTransition.m; sourceTree = "<group>"; };
+		D39EF0D318E45F440086F5ED /* FMDismissDetailTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDismissDetailTransition.h; sourceTree = "<group>"; };
+		D39EF0D418E45F440086F5ED /* FMDismissDetailTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDismissDetailTransition.m; sourceTree = "<group>"; };
 		D3DD9F0718D8D57F00C27BED /* FMFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMFriendsViewController.h; sourceTree = "<group>"; };
 		D3DD9F0818D8D57F00C27BED /* FMFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMFriendsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,9 +189,11 @@
 				D34A9FC018CB54AE00F579E0 /* Main.storyboard */,
 				D3DD9F0318D8CF2300C27BED /* Friends */,
 				D34A9FF718CBC86600F579E0 /* Login */,
+				D39EF0CF18E45A350086F5ED /* Log Out View */,
 				D3E6044018DA336300224090 /* Profile */,
 				D31FD23118DC71AC00575953 /* Profile Edit */,
 				D34A9FFD18CBDAE100F579E0 /* Sign Up */,
+				D39EF0D018E45F280086F5ED /* Transitions */,
 				D34A9FC618CB54AE00F579E0 /* Images.xcassets */,
 				D34A9FB518CB54AE00F579E0 /* Supporting Files */,
 			);
@@ -235,6 +246,26 @@
 				D34A9FFF18CBDAF400F579E0 /* FMSignUpViewController.m */,
 			);
 			name = "Sign Up";
+			sourceTree = "<group>";
+		};
+		D39EF0CF18E45A350086F5ED /* Log Out View */ = {
+			isa = PBXGroup;
+			children = (
+				D39EF0CC18E45A2C0086F5ED /* FMLogOutViewController.h */,
+				D39EF0CD18E45A2C0086F5ED /* FMLogOutViewController.m */,
+			);
+			name = "Log Out View";
+			sourceTree = "<group>";
+		};
+		D39EF0D018E45F280086F5ED /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				D39EF0D118E45F440086F5ED /* FMPresentDetailTransition.h */,
+				D39EF0D218E45F440086F5ED /* FMPresentDetailTransition.m */,
+				D39EF0D318E45F440086F5ED /* FMDismissDetailTransition.h */,
+				D39EF0D418E45F440086F5ED /* FMDismissDetailTransition.m */,
+			);
+			name = Transitions;
 			sourceTree = "<group>";
 		};
 		D3DD9F0318D8CF2300C27BED /* Friends */ = {
@@ -355,12 +386,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D34A9FFA18CBC87B00F579E0 /* FMLoginViewController.m in Sources */,
+				D39EF0D618E45F440086F5ED /* FMDismissDetailTransition.m in Sources */,
 				D3DD9F0918D8D57F00C27BED /* FMFriendsViewController.m in Sources */,
+				D39EF0D518E45F440086F5ED /* FMPresentDetailTransition.m in Sources */,
 				D31FD23418DC773500575953 /* FMEditProfileTableViewController.m in Sources */,
 				D31FD23018DC5D3000575953 /* FMProfileTableViewController.m in Sources */,
 				D34A9FBB18CB54AE00F579E0 /* main.m in Sources */,
 				D34A9FBF18CB54AE00F579E0 /* FMAppDelegate.m in Sources */,
 				D34AA00018CBDAF400F579E0 /* FMSignUpViewController.m in Sources */,
+				D39EF0CE18E45A2C0086F5ED /* FMLogOutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
