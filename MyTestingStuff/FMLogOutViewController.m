@@ -126,7 +126,9 @@
         UISnapBehavior *snap = [[UISnapBehavior alloc] initWithItem:self.alertView snapToPoint:CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMaxY(self.view.bounds) + 180.0f)];
         [self.animator addBehavior:snap];
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.delegate didPressLogOutButton];
+        }];
     }
     else
     {

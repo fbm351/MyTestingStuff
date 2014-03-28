@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FMLogOutViewControllerDelegate <NSObject>
+
+@required
+
+- (void)didPressLogOutButton;
+
+@end
+
 @interface FMLogOutViewController : UIViewController
+
+@property (weak, nonatomic) id<FMLogOutViewControllerDelegate>delegate;
 
 @end

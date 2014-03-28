@@ -11,7 +11,7 @@
 #import "FMPresentDetailTransition.h"
 #import "FMDismissDetailTransition.h"
 
-@interface FMProfileTableViewController () <UIAlertViewDelegate, UIViewControllerTransitioningDelegate>
+@interface FMProfileTableViewController () <UIAlertViewDelegate, UIViewControllerTransitioningDelegate, FMLogOutViewControllerDelegate>
 
 @property (strong, nonatomic) PFUser *user;
 
@@ -86,19 +86,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - IBActions
-
-- (IBAction)logOutButtonPressed:(UIButton *)sender
-{
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log out", nil];
-//    [alertView show];
-    
-    FMLogOutViewController *logOutView = [[FMLogOutViewController alloc] init];
-    logOutView.modalPresentationStyle = UIModalPresentationCustom;
-    logOutView.transitioningDelegate = self;
-    [self presentViewController:logOutView animated:YES completion:nil];
-}
-
 
 #pragma mark - Table view data source
 
@@ -110,6 +97,21 @@
     else
     {
         return 1;
+    }
+}
+
+#pragma mark - TableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        //NSLog(@"Log Out");
+        FMLogOutViewController *logOutView = [[FMLogOutViewController alloc] init];
+        logOutView.modalPresentationStyle = UIModalPresentationCustom;
+        logOutView.transitioningDelegate = self;
+        logOutView.delegate = self;
+        [self presentViewController:logOutView animated:YES completion:nil];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
@@ -144,6 +146,14 @@
     return [[FMDismissDetailTransition alloc] init];
 }
 
+#pragma mark - FMLogOutViewController Delegate
+
+- (void)didPressLogOutButton
+{
+    [PFUser logOut];
+    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
+}
+
 
 #pragma mark - Helper Methods
 
@@ -171,9 +181,6 @@
     self.genderLabel.text = self.user[@"gender"];    
 }
 
-- (void)logoutUser
-{
-    
-}
+
 
 @end
