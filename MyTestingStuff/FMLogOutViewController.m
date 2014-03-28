@@ -90,10 +90,10 @@
     [logOutButton setTitleColor:logOutButton.tintColor forState:UIControlStateNormal];
     [logOutButton setTitleColor:logOutButton.tintColor forState:UIControlStateSelected];
     [logOutButton setTitleColor:logOutButton.tintColor forState:UIControlStateHighlighted];
-    [logOutButtonView addSubview:logOutButton];
     [logOutButton addTarget:self action:@selector(changeButtonBackgroundColor:) forControlEvents:UIControlEventTouchDown];
     [logOutButton addTarget:self action:@selector(resetButtonBackgroundColor:) forControlEvents:UIControlEventTouchUpInside];
     [logOutButton addTarget:self action:@selector(resetButtonBackgroundColorOnCancel:) forControlEvents:UIControlEventTouchUpOutside];
+    [logOutButtonView addSubview:logOutButton];
     
     //Cancel Button
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -103,10 +103,10 @@
     [cancelButton setTitleColor:cancelButton.tintColor forState:UIControlStateNormal];
     [cancelButton setTitleColor:cancelButton.tintColor forState:UIControlStateSelected];
     [cancelButton setTitleColor:cancelButton.tintColor forState:UIControlStateHighlighted];
-    [cancelButtonView addSubview:cancelButton];
     [cancelButton addTarget:self action:@selector(changeButtonBackgroundColor:) forControlEvents:UIControlEventTouchDown];
     [cancelButton addTarget:self action:@selector(resetButtonBackgroundColor:) forControlEvents:UIControlEventTouchUpInside];
     [cancelButton addTarget:self action:@selector(resetButtonBackgroundColorOnCancel:) forControlEvents:UIControlEventTouchUpOutside];
+    [cancelButtonView addSubview:cancelButton];
 
     
 }
